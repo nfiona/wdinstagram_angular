@@ -2,7 +2,7 @@
 <div class="post" data-ng-repeat="insta in vm.instas">
   <h3>{{insta.author}}</h3>
   <div>
-    <img ui-sref="wdinstagramShow({id: $index})" ng-src="{{insta.photo_url}}">
+    <img data-ui-sref="wdinstagramShow({id: insta.id})" ng-src="{{insta.photo_url}}">
   </div>
   <p>{{insta.body}}</p>
 </div>

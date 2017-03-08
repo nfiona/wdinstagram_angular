@@ -58,7 +58,7 @@ function WdinstagramIndexControllerFunction(WdinstagramFactory) {
   this.instas = WdinstagramFactory.query();
 }
 
-function WdinstagramShowControllerFunction($stateParams) {
+function WdinstagramShowControllerFunction(WdinstagramFactory,$stateParams) {
   // this.insta = instas[$stateParams.id];
   this.insta = WdinstagramFactory.get({id: $stateParams.id});
   console.log(this.insta)

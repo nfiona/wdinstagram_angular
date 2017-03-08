@@ -106,6 +106,11 @@ function WdinstagramEditControllerFunction(WdinstagramFactory,$stateParams,$stat
       $state.go("wdinstagramShow", {id: insta.id})
     })
   }
+  this.destroy = function() {
+    this.insta.$delete({id: $stateParams.id}, function(insta) {
+      $state.go("wdinstagramShow", {id: insta.id})
+    });
+  }
 }
 
 

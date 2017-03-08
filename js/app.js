@@ -35,6 +35,13 @@
       "$stateParams",
       WdinstagramShowControllerFunction
     ])
+    .controller("WdinstagramEditController", [
+      "WdinstagramFactory",
+      "$stateParams",
+      "$state",
+      WdinstagramEditControllerFunction
+    ])
+
 
 
     function RouterFunction($stateProvider) {
@@ -56,6 +63,12 @@
           controller: "WdinstagramShowController",
           controllerAs: "vm",
           templateUrl: "js/ng-views/show.html"
+        })
+        .state("wdinstagramEdit", {
+          url: "/wdinstagram/:id/edit",
+          controller: "WdinstagramEditController",
+          controllerAs: "vm",
+          templateUrl: "js/ng-views/edit.html"
         });
 
     }
@@ -86,7 +99,14 @@ function WdinstagramShowControllerFunction(WdinstagramFactory,$stateParams) {
   console.log(this.insta)
 }
 
-
+function WdinstagramEditControllerFunction(WdinstagramFactory,$stateParams,$state) {
+  this.insta = WdinstagramFactory.get({id: $stateParams.id})
+  this.update = function() {
+    this.insta.$update({id: $stateParams.id}, function(insta) {
+      $state.go("wdinstagramShow", {id: insta.id})
+    })
+  }
+}
 
 
 

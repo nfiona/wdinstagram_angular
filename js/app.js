@@ -16,7 +16,13 @@
       "$stateProvider",
     RouterFunction
     ])
-    .controller("WdinstagramIndexController", [WdinstagramIndexControllerFunction])
+    .controller("WdinstagramIndexController", [
+      WdinstagramIndexControllerFunction
+    ])
+    .controller("WdinstagramShowController", [
+      "$stateParams",
+      WdinstagramShowControllerFunction
+    ])
 
 
     function RouterFunction($stateProvider) {
@@ -27,11 +33,21 @@
           controller: "WdinstagramIndexController",
           controllerAs: "vm"
         })
+        .state("wdinstagramShow", {
+          url: "/wdinstagram/:id",
+          controller: "WdinstagramShowController",
+          controllerAs: "vm",
+          templateUrl: "js/ng-views/show.html"
+        });
 
     }
 
 function WdinstagramIndexControllerFunction() {
   this.instas = instas
+}
+
+function WdinstagramShowControllerFunction($stateParams) {
+  this.insta = instas[$stateParams.id];
 }
 
 

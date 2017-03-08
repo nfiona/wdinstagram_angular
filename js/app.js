@@ -25,6 +25,11 @@
       "WdinstagramFactory",
       WdinstagramIndexControllerFunction
     ])
+    .controller("WdinstagramNewController", [
+      "WdinstagramFactory",
+      "$state",
+      WdinstagramNewControllerFunction
+    ])
     .controller("WdinstagramShowController", [
       "WdinstagramFactory",
       "$stateParams",
@@ -40,6 +45,12 @@
           controller: "WdinstagramIndexController",
           controllerAs: "vm"
         })
+        .state("wdinstagramNew", {
+          url: "/wdinstagram/new",
+          templateUrl:  "js/ng-views/new.html",
+          controller: "WdinstagramNewController",
+          controllerAs: "vm"
+        })
         .state("wdinstagramShow", {
           url: "/wdinstagram/:id",
           controller: "WdinstagramShowController",
@@ -50,12 +61,23 @@
     }
 
 function WdinstagramFactoryFunction($resource) {
-  return $resource("http://localhost:3000/entries/:id");
+  return $resource("http://localhost:3000/entries/:id", {}, {
+  update: {method: "PUT"}
+});
 }
 
 function WdinstagramIndexControllerFunction(WdinstagramFactory) {
   // this.instas = instas
   this.instas = WdinstagramFactory.query();
+}
+
+function WdinstagramNewControllerFunction(WdinstagramFactory,$state) {
+  this.insta = new WdinstagramFactory()
+  this.create = function() {
+    this.insta.$save(function(insta) {
+      $state.go("wdinstagramShow", {id: insta.id})
+    })
+  }
 }
 
 function WdinstagramShowControllerFunction(WdinstagramFactory,$stateParams) {

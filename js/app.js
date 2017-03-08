@@ -1,5 +1,43 @@
 "use strict";
 
 (function(){
-  angular.module("wdinstagram", [])
+
+  let instas = [
+  { photo_url: "https://scontent.cdninstagram.com/t51.2885-15/sh0.08/e35/p640x640/16908601_1857220607890490_3724722405050941440_n.jpg", author: "@_foodstories", body: "Happy friday guys! Get the recipe for this delicious pommegranate breakfast bowl on the blog, link is in profile  #ourfoodstories"},
+  { photo_url: "https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/16789190_1832554793629676_456038695481376768_n.jpg", author: "@crumbs_whisker", body: "Our fave snuggler, lil man, was adopted last weekend and we're pretty stoked about it 😸💛 #crumbsandwhiskers #catcafe"},
+  { photo_url: "http://68.media.tumblr.com/6b5eff405127a77a9df54d146421234f/tumblr_n0j93hFARI1svx5guo1_1280.jpg", author: "@NatGeoTravel", body: "Staggering trees grace @NatGeoTravel's first #natgeotravelpic Instagram feature photo in Kitasaga Bamboo Grove in"}
+  ]
+
+  angular
+    .module("wdinstagram", [
+    "ui.router"
+    ])
+    .config([
+      "$stateProvider",
+    RouterFunction
+    ])
+    .controller("WdinstagramIndexController", [WdinstagramIndexControllerFunction])
+
+
+    function RouterFunction($stateProvider) {
+      $stateProvider
+        .state("wdinstagramIndex", {
+          url: "/wdinstagram",
+          templateUrl:  "js/ng-views/index.html",
+          controller: "WdinstagramIndexController",
+          controllerAs: "vm"
+        })
+
+    }
+
+function WdinstagramIndexControllerFunction() {
+  this.instas = instas
+}
+
+
+
+
+
+
+
 })();
